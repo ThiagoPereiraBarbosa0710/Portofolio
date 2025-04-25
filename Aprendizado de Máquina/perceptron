@@ -1,0 +1,81 @@
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn import datasets
+import numpy as np
+
+def unit_step_func(x):
+    return np.where(x > 0 , 1, 0)
+
+def accuracy(y_true, y_pred):
+    accuracy = np.sum(y_true == y_pred) / len(y_true)
+    return accuracy
+
+class Perceptron:
+
+    def __init__(self, learning_rate=0.001, n_iters=10):
+        self.lr = learning_rate # velocidade do aprendizado
+        self.n_iters = n_iters # número de interações
+        self.activation_func = unit_step_func
+        self.weights = None # peso
+        self.bias = None # viés
+
+    # treino
+    def fit(self, X, y):
+        n_samples, n_features = X.shape
+
+        # parâmetros iniciais (peso, viés = 0)
+        self.weights = np.zeros(n_features)
+        self.bias = 0
+
+        y_ = np.where(y > 0 , 1, 0)
+
+        # peso e viés
+        for _ in range(self.n_iters):
+            for idx, x_i in enumerate(X):
+                linear_output = np.dot(x_i, self.weights) + self.bias
+                y_predicted = self.activation_func(linear_output)
+
+                # atualização: multiplica a vel de aprend pela diferença entre os valores reais e previsto
+                update = self.lr * (y_[idx] - y_predicted)
+                # "empura" a linha para as margens corretas
+                self.weights += update * x_i
+                self.bias += update
+
+    # previsão
+    def predict(self, X):
+        linear_output = np.dot(X, self.weights) + self.bias
+        y_predicted = self.activation_func(linear_output)
+        return y_predicted
+
+
+# teste
+if __name__ == "__main__":
+                                # amostras/ carac por teste/ num agrup/ distancia dos agr/ semente
+    X, y = datasets.make_blobs(n_samples=150, n_features=3, centers=3, cluster_std=1.05, random_state=3)
+
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=123)
+
+    p = Perceptron()
+    p.fit(X_train, y_train)
+    predictions = p.predict(X_test)
+
+    print(f"Número de amostras de teste: {len(X_test)}")
+    print("Precisão:", accuracy(y_test, predictions))
+
+    fig = plt.figure()
+    ax = fig.add_subplot(1, 1, 1)
+    plt.scatter(X_train[:, 0], X_train[:, 1], marker="o", c=y_train)
+
+    x0_1 = np.amin(X_train[:, 0])
+    x0_2 = np.amax(X_train[:, 0])
+
+    x1_1 = (-p.weights[0] * x0_1 - p.bias) / p.weights[1]
+    x1_2 = (-p.weights[0] * x0_2 - p.bias) / p.weights[1]
+
+    ax.plot([x0_1, x0_2], [x1_1, x1_2], "k")
+
+    ymin = np.amin(X_train[:, 1])
+    ymax = np.amax(X_train[:, 1])
+    ax.set_ylim([ymin - 3, ymax + 3])
+
+    plt.show()
