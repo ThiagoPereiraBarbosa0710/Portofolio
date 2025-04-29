@@ -1,0 +1,25 @@
+def verificar_hashes(lista_hashes):
+    for hash_comparacao in lista_hashes:
+
+        hash_calculado, hash_esperado = hash_comparacao.split(",")
+        # TODO: Verifique se o hash calculado é igual ao hash esperado:
+
+        hash_calculado = hash_calculado.strip()
+        hash_esperado = hash_esperado.strip()
+
+        if (hash_calculado == hash_esperado):
+            print("Correto")
+        else:
+            print("Inválido")
+
+#Entrada exemplos:
+#abc123, abc123 // def456, def789 // 123abc, 123abc; 456def,456def
+
+#Saida exemplos respectivos:
+#Correto // Inválido // Correto Correto
+
+hashes_usuario = "abc123, abc123"
+
+lista_hashes = hashes_usuario.split(";")
+
+verificar_hashes(lista_hashes)
