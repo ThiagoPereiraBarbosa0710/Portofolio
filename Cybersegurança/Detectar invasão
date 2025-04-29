@@ -1,0 +1,81 @@
+# Função para detectar tentativas de invasão em registros de log
+def detectar_invasao(registros):
+    # Variáveis para rastrear o ID do usuário atual e suas falhas consecutivas
+    usuario_atual = None
+    tentativas_consecutivas = 0
+    invasor_detectado = None
+
+    # TODO: Percorra cada registro de log:
+    x=0
+    tentativas = []
+    while x < len(registros):
+
+    # TODO: Separe o ID do usuário e o status do registro (sucesso ou falha):
+        tentativas.append(registros[x].split(":"))
+        x = x + 1
+
+    x=0
+    y=0
+    usuario = []
+    status = []
+    while x < len(tentativas):
+        while y < len(tentativas[x]):
+            usuario.append(tentativas[x][y])
+            status.append(tentativas[x][y+1])
+            break
+        x = x + 1
+
+    x=0
+    while x < len(usuario):
+        if usuario[x] == usuario[x-1] and status[x] == "falha":
+            tentativas_consecutivas = tentativas_consecutivas + 1
+            invasor_detectado = usuario[x]
+        else:
+            tentativas_consecutivas = 0
+            invasor_detectado = "Nenhum invasor detectado"
+        x = x + 1
+
+    # TODO: Verifique se o usuário atual é o mesmo da iteração anterior:
+
+    # Se o status é "falha", incremente o contador de tentativas falhas
+
+    # Se a tentativa foi bem-sucedida, resete o contador de falhas
+
+    # TODO: Se mudar de usuário, verifique se o usuário anterior teve mais de 3 falhas consecutivas:
+
+    # TODO: Atualize para o novo usuário e reinicie a contagem de tentativas falhas:
+
+    # Se a nova tentativa for "falha", inicie a contagem em 1; caso contrário, inicie em 0
+
+
+# TODO: Após o loop, verifique se o último usuário teve mais de 3 tentativas de falha:
+
+
+# Retorna o resultado final
+    print(invasor_detectado)
+    return invasor_detectado
+
+
+# Função principal para executar o programa
+def main():
+
+    #Entrada exemplo:
+    #user1:falha, user1:falha, user1:falha, user1:sucesso // user2:falha, user2:falha, user2:falha, user2:falha // user3:sucesso, user3:falha, user3:falha, user3:falha, user3:falha
+
+    #Saída exemplo respectivo:
+    #Nenhum invasor detectado // user2 // user3
+
+    # Solicita ao usuário que insira os registros de log
+    entrada = "user3:sucesso, user3:falha, user3:falha, user3:falha, user3:falha"
+
+    registros = [registro.strip().strip('"') for registro in entrada.split(",")]
+
+    # TODO: Chama a função para detectar tentativas de invasão:
+    detectar_invasao(registros)
+
+    # Imprime o resultado
+
+
+# Chama a função principal para executar o programa
+if __name__ == "__main__":
+    main()
