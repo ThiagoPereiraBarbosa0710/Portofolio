@@ -1,0 +1,74 @@
+# Dicionário que mapeia números de portas aos serviços correspondentes
+from operator import index
+
+port_services = {
+    21: "FTP",  # Serviço de transferência de arquivos
+    22: "SSH",  # Secure Shell (acesso remoto seguro)
+    23: "Telnet",  # Protocolo de acesso remoto inseguro
+    25: "SMTP",  # Serviço de envio de emails
+    53: "DNS",  # Serviço de tradução de nomes de domínio
+    80: "HTTP",  # Protocolo de transferência de hipertexto (web)
+    110: "POP3",  # Serviço de recebimento de emails
+    143: "IMAP",  # Serviço de recebimento de emails com suporte a pastas
+    443: "HTTPS",  # Protocolo seguro de transferência de hipertexto
+    3306: "MySQL",  # Banco de dados MySQL
+    3389: "RDP",  # Remote Desktop Protocol (Acesso remoto ao Windows)
+    5432: "PostgreSQL",  # Banco de dados PostgreSQL
+    6379: "Redis"  # Banco de dados Redis
+}
+
+
+# Função que realiza a enumeração de serviços
+def enumerate_services(ports):
+    # Inicializamos uma lista para armazenar os serviços correspondentes
+    services = []
+
+    # TODO: Itere sobre cada porta fornecida na lista de portas
+    services = ports
+
+
+    x = 0
+    while x < len(ports):
+        if ports[x] in port_services:
+            services[x] = port_services[ports[x]]
+        else:
+            services[x] = "Desconhecido"
+            break
+
+        x += 1
+
+    # TODO: Verifique se a porta existe no dicionário de serviços
+    # TODO: Se existir, adicione o serviço correspondente à lista de serviços
+    # TODO: Se a porta não estiver mapeada, adicione "Desconhecido"
+    print(services)
+    return services
+
+
+# Função principal que lida com a entrada do usuário e exibe o resultado:
+def main():
+    # Entrada exemplos:
+    # 22, 80, 443 // 21, 53, 3306 // 23, 443, 8080
+
+    # Saida exemplos respectivos:
+    # ['SSH', 'HTTP', 'HTTPS'] // ['FTP', 'DNS', 'MySQL'] // ['Telnet', 'HTTPS', 'Desconhecido']
+
+    ports_input = "23, 443, 8080"
+
+    # TODO: Converta a string de entrada para uma lista de inteiros (números de portas)
+    # Utilize a função strip() para remove espaços em branco, e o split() para separar por vírgula
+    ports_input = ports_input.strip() #tirou os espaços em brancos das strings
+    ports_input = ports_input.split(",") #separou a string pelas vírgulas criando 3 strings
+    ports_int = []
+
+    x=0
+    while x < len(ports_input):
+        ports_int.append(int(ports_input[x].strip()))
+        x += 1
+
+    # TODO: Chame a função de enumeração para obter a lista de serviços correspondentes:
+    enumerate_services(ports_int)
+    #print(services)
+
+
+if __name__ == "__main__":
+    main()
