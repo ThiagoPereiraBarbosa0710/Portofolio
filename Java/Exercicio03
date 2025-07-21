@@ -1,0 +1,24 @@
+/*
+ * Desenvolva um programa que recebe os valores da base e altura do retângulo,
+ * calcula a área e o perímetro e mostra todos os dados (JOptionPane)
+ */
+
+package exercicios;
+import javax.swing.JOptionPane;
+
+public class Exercicio03 {
+    public static void main(String[] args) {
+        double base, altura, area, perimetro;
+        
+        base = Double.parseDouble(JOptionPane.showInputDialog("Digite a base: ").replace(',','.'));
+        altura = Double.parseDouble(JOptionPane.showInputDialog("Digite a altura: ").replace(',','.'));
+        
+        area = base*altura;
+        perimetro = 2 * (base+altura);
+        
+        JOptionPane.showMessageDialog(null, "Base: "+base+
+                "\nAltura: "+altura+
+                "\nArea: "+area+
+                "\nPerimetro: "+perimetro);
+    }
+}
