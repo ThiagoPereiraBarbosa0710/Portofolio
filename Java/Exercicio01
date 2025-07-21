@@ -1,0 +1,27 @@
+/*
+ * Fazer um progeama que entra com os dade de uma pessoa (nome, idade, sexo e
+ * altura) e mostra em seguida
+*/
+
+package exercicios;
+import javax.swing.JOptionPane;
+
+public class Exercicio01 {
+    public static void main(String[] args) {
+        String nome, sexo;
+        int idade;
+        double peso, altura;
+        
+        nome = JOptionPane.showInputDialog("Digite o nome: ");
+        sexo = JOptionPane.showInputDialog("Digite o sexo: ");
+        idade = Integer.parseInt(JOptionPane.showInputDialog("Digite a idade: "));
+        peso = Double.parseDouble(JOptionPane.showInputDialog("Digite o peso: ").replace(',','.'));
+        altura = Double.parseDouble(JOptionPane.showInputDialog("Digite a altura: ").replace(',','.'));
+        
+        JOptionPane.showMessageDialog(null, "Nome: "+nome+
+                "\nSexo: "+sexo.charAt(0)+
+                "\nIdade: "+idade+
+                "\nPeso: "+peso+
+                "\nAltura: "+altura);
+    }
+}
