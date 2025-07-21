@@ -1,0 +1,34 @@
+/*
+ * Desenvolver uma classe EntradaDados2 que deverá receber como entrada os
+ * dados de uma conta de banco: o nome do client, o CPF, a conta bancária e o
+ * saldo. Ao final mostrar esses dados na tela. Essa classe deverá conter a
+ * função main.
+ */
+
+package entradaDados;
+import javax.swing.JOptionPane;
+
+public class EntradaDados2 {
+    public static void main(String[] args) {
+        // Declaração das variáveis
+        String nome, cpf;
+        int conta;
+        double deposito, saldo = 1000;
+        
+        // Entrada de dados
+        nome = JOptionPane.showInputDialog("Digite o nome: ");
+        cpf = JOptionPane.showInputDialog("Digite o CPF: ");
+        conta = Integer.parseInt(JOptionPane.showInputDialog("Digite a conta: "));
+        deposito = Double.parseDouble(JOptionPane.showInputDialog("Digite o deposito: "));
+        
+        // Processamento
+        saldo = saldo + deposito;
+        
+        // Saída
+        JOptionPane.showMessageDialog(null, "Nome: "+nome+
+                "\nCPF: "+cpf+
+                "\nConta: "+conta+
+                "\nDeposito: "+String.format("R$ %.2f", deposito)+
+                "\nSaldo: "+String.format("R$ %.2f", saldo), "Conta", 1);
+    }
+}
