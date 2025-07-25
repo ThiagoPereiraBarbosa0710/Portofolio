@@ -1,0 +1,51 @@
+/*
+ * Escreva um programa em Java que peça para o usuário fornecer o valor do raio
+ * de um círculo. O valor do raio deve ser um número inteiro. O programa deve
+ * calcular o valor do diâmetro, do comprimento ou da área desse círculo,
+ * conforme opção do usuário. O resultado de cada cálculo deve ser armazenado
+ * em uma variável. No final, o programa deve exibir ao usuário o valor obtido.
+ * Lembrando que:
+ * Área do círculo: PI * raio^2
+ * Comprimento do círuclo: 2 * PI * raio
+ * Diâmetro do círculo: 2 * raio
+ */
+package exercicios;
+
+import java.util.Scanner;
+
+/**
+ *
+ * @author thiag
+ */
+public class Circulo {
+    public static void main(String[] args) {
+        int raio, opcao;
+        double area, comprimento, diametro;
+        
+        Scanner entrada = new Scanner(System.in);
+        
+        System.out.print("Digite o raio: ");
+        raio = entrada.nextInt();
+        System.out.print("Escolha a operacao: "+
+                "\n1 - Area"+" 2 - Comprimento"+" 3 - Diametro\n");
+        opcao = entrada.nextInt();
+        
+        switch(opcao){
+            case 1:
+                area = Math.PI * Math.pow(raio, 2);
+                System.out.println(String.format("Area do circulo: %.2f", area));
+                break;
+            case 2:
+                comprimento = 2 * Math.PI * raio;
+                System.out.println(String.format("Comprimento do circulo: %.2f", comprimento));
+                break;
+            case 3:
+                diametro = 2 * raio;
+                System.out.println(String.format("Diametro do circulo: %.2f", diametro));
+                break;
+            default:
+                System.out.println("Opcao invalida!");
+                break;
+        }
+    }
+}
