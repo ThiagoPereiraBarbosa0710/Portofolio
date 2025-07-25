@@ -1,0 +1,36 @@
+/*
+ * Desenvolva um programa em Java que pede o peso e a altura da pessoa e
+ * calcula o IMC (índice de massa corporal). O programa deve mostrar o
+ * resultado e qual a situação da pessoa
+ */
+
+package exercicios;
+import java.util.Scanner;
+
+public class Imc {
+    public static void main(String[] args) {
+        double peso, altura, media;
+        
+        Scanner entrada = new Scanner(System.in);
+        
+        System.out.print("Digite o peso: ");
+        peso = entrada.nextFloat();
+        System.out.print("Digite a altura: ");
+        altura = entrada.nextFloat();
+        
+        media = peso/Math.pow(altura, 2);
+        
+        if(media<18.5)
+            System.out.println(String.format("IMC: %.2f", media)+" Classificao: Magreza");
+        else if(media<=24.9)
+            System.out.println(String.format("IMC: %.2f", media)+ " Classificacao: Normal");
+        else if(media<=29.9)
+            System.out.println(String.format("IMC: %.2f", media)+" Classificacao: Sobrepeso");
+        else if(media<=34.9)
+            System.out.println(String.format("IMC: %.2f", media)+ " Classificacaoo: Obesidade grau I");
+        else if(media<=39.9)
+            System.out.println(String.format("IMC: %.2f", media)+ " Classificacaoo: Obesidade grau II");
+        else
+            System.out.println(String.format("IMC: %.2f", media)+" Classificacaoo: Obesidade grau III");
+    }
+}
